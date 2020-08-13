@@ -1,4 +1,4 @@
-#include <algorithm>  // for sort
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -12,7 +12,6 @@ using std::string;
 using std::vector;
 using std::abs;
 
-// TODO: Add kStart and kFinish enumerators to the State enum.
 enum class State {kEmpty, kObstacle, kClosed, kPath, kStart, kFinish};
 
 // directional deltas
@@ -145,7 +144,6 @@ vector<vector<State>> Search(vector<vector<State>> grid, int init[2], int goal[2
 
     // Check if we're done.
     if (x == goal[0] && y == goal[1]) {
-      // TODO: Set the init grid cell to kStart, and 
       // set the goal grid cell to kFinish before returning the grid. 
       grid[init[0]][init[1]] = State::kStart;
       grid[goal[0]][goal[1]] = State::kFinish;
@@ -166,7 +164,7 @@ string CellString(State cell) {
   switch(cell) {
     case State::kObstacle: return "⛰️   ";
     case State::kPath: return "🚗   ";
-    // TODO: Add cases to return "🚦   " for kStart
+    // Add cases to return "🚦   " for kStart
     // and "🏁   " for kFinish.
     case State::kStart: return "🚦 ";
     case State::kFinish: return "🏁 ";
@@ -192,11 +190,4 @@ int main() {
   auto board = ReadBoardFile("1.board");
   auto solution = Search(board, init, goal);
   PrintBoard(solution);
-  // Tests
-  TestHeuristic();
-  TestAddToOpen();
-  TestCompare();
-  TestSearch();
-  TestCheckValidCell();
-  TestExpandNeighbors();
 }
